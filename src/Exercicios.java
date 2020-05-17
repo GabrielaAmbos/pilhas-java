@@ -77,6 +77,29 @@ public class Exercicios<E> {
 	}
 	
 	/**
+	 * 9. Implemente um método que recebe uma pilha como parâmetro e inverte a ordem dos
+	 * seus elementos. Use somente outras pilhas como estruturas auxiliares.
+	 */
+	public void invertePilha(Stack<E> p) {
+		int tamanho = p.numElements();
+		Stack<E> pilhaAuxA = new StaticStack<E>(p.numElements());
+		Stack<E> pilhaAuxB = new StaticStack<E>(p.numElements());
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = p.pop();
+			pilhaAuxA.push(elementoAux);
+		}
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = pilhaAuxA.pop();
+			pilhaAuxB.push(elementoAux);
+		}
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = pilhaAuxB.pop();
+			p.push(elementoAux);
+		}
+	}
+	
+	
+	/**
 	 * 10. Escreva um algoritmo para verificar se um dado elemento está presente em uma pilha.
 	 * Em caso positivo, o algoritmo deve fornecer também a posição do item na pilha,
 	 * considerando a base como posição 0. A pilha deve permanecer a mesma após a

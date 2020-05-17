@@ -5,7 +5,7 @@ public class TesteTestePilha {
 		// TODO Auto-generated method stub
 		
 		Exercicios e = new Exercicios();
-		String ex = "A + B(";
+		String ex = "12345";
 		char[] ex1 = ex.toCharArray();
 		StaticStack<Character> s1 = new StaticStack<Character>(100);
 		for(char c : ex1) {
@@ -16,8 +16,10 @@ public class TesteTestePilha {
 		//“((A + B)” e “A + B(” 
 		//“((A + B) – (C + D))”
 			
-		boolean a = e.checkBrackets(s1);
-		System.out.println(a);
+		
+		System.out.println(s1.toString() + "\n\n");
+		e.invertePilha(s1);
+		System.out.println(s1.toString());
 
 	}
 }
