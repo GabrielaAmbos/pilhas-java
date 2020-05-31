@@ -97,4 +97,92 @@ public class StaticStack<E> implements Stack<E> {
 		}
 		return false;
 	}
+	
+	/**
+	 * 1. Implemente um método que inverte a ordem dos elementos da pilha.
+	 */
+	public void flip() {
+		int tamanho = numElements();
+		Stack<E> pilhaAuxA = new StaticStack<E>(numElements());
+		Stack<E> pilhaAuxB = new StaticStack<E>(numElements());
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = this.pop();
+			pilhaAuxA.push(elementoAux);
+		}
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = pilhaAuxA.pop();
+			pilhaAuxB.push(elementoAux);
+		}
+		for(int i = 0; i < tamanho; i++) {
+			E elementoAux = pilhaAuxB.pop();
+			this.push(elementoAux);
+		}
+	}
+	
+	/**
+	 * 2. Implemente uma sobrecarga do método push que recebe como parâmetro uma pilha, em vez de
+	 * um elemento. Esse método deve adicionar à pilha corrente os elementos da pilha passada como
+	 * parâmetro, porém mantendo a ordem original – ou seja, o elemento do topo da pilha passada
+	 * como parâmetro deve ficar no topo da pilha corrente.
+	 */
+	public void push(StaticStack<E>pilha) throws OverflowException {
+		if (isFull()) {
+			throw new OverflowException();
+		} else {
+			pilha.flip();
+			while(!pilha.isEmpty()) {
+				E elementoAux = pilha.pop();
+				this.push(elementoAux);
+			}
+		}
+	}
+	
+	/**
+	 * 3. Implemente um método equals para a pilha. Uma pilha será igual a outra se contiver os
+	 * mesmos elementos, empilhados na mesma ordem. Para comparar os elementos, use também o
+	 * método equals
+	 */
+	public boolean equals(Stack<E>pilha) {
+		int tamanho = numElements();
+		if(pilha.numElements() != tamanho) {
+			return false;
+		} else {
+			for(int i = tamanho - 1; i >= 0; i--) {
+				E aux = pilha.pop();
+				if(!elements[i].equals(aux)) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
+	/**
+	 * 4. Implemente um método clone para a pilha. Esse método deve retornar uma nova pilha contendo
+	 * os mesmos elementos da atual. Os elementos em si não devem ser duplicados.
+	 */
+	public StaticStack<E> clone() {
+		StaticStack<E> aux = new StaticStack<E>(elements.length);
+		for(int i = 0; i < numElements(); i++) {
+			aux.push(elements[i]);
+		}
+		return aux;
+		
+	}
+	/**
+	 * 5. Na classe StaticStack, implemente um método que apaga todos os elementos da pilha. Utilize
+	 * a assinatura abaixo, completando o espaço em branco pela exceção correta a ser lançada por
+	 * este método:
+	 */
+	public void clear() throws UnderflowException{
+		if(isEmpty()) {
+			throw new UnderflowException();
+		} else {
+			while(!isEmpty()) {
+				this.pop();
+			}
+		}
+	}
+	
+	
 }
